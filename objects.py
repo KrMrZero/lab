@@ -15,21 +15,23 @@ class AddCar:
         self.light = input('Состояние фар:')
         self.doors = input('Состояние дверей:')
         self.maxV = input('Максимальная скорость км/ч:')
+        self.trunk = input('Состояние багажника:')
+        self.milage = input('Пробег:')
         self.m = input('Масса кг:')
 
-        self.check(self.light,self.doors,self.num)
+        self.check(self.light,self.doors,self.num,self.trunk)
 
     def add_in_file(self,file):
         with open(f'{file}', 'a', encoding='utf-8') as f:
             f.write(f'{self.mark} {self.model} {self.num} {self.engine} {self.color} '
-                    f'{self.light} {self.doors} {self.maxV} {self.m}\n')
+                    f'{self.light} {self.doors} {self.maxV} {self.trunk} {self.milage} {self.m}\n')
 
-    def check(self,light, doors,num):  # Проверка верности введенных данных
+    def check(self,light, doors,num, trunk):  # Проверка верности введенных данных
         n = [i[2] for i in ReadCar().list]
         k = ['on', 'On', 'off', 'Off', 'вкл', 'Вкл', 'выкл', 'Выкл']
         d = ['open', 'Open', 'close', 'Close', 'открыто', 'Открыто', 'заперто', 'Заперто']
 
-        if (light not in k) or (doors not in d) or (num in n):
+        if (light not in k) or (doors not in d) or (num in n) or (trunk not in d):
             while num in n:
                 num = input('\nВведеннный номер уже занят. Введите другой:\n')
 
@@ -38,12 +40,17 @@ class AddCar:
 
             while doors not in d:
                 doors = input('\nВведите состояние дверей только открыто/заперто или open/close:\n')
+            
+            while trunk not in d:
+                doors = input('\nВведите состояние багажника только открыто/заперто или open/close:\n')
+
 
         self.light = light
         self.doors = doors
         self.num = num
+        self.trunk = trunk
 
-        return self.light, self.doors, self.num
+        return self.light, self.doors, self.num, self.trunk
 
     def register(self,par,what):
         S = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -71,8 +78,8 @@ class ReadCar():
         with open('car catalog 3.1.txt','r',encoding='utf-8') as f:
             self.list = []
             for i in f.readlines():
-                self.mark,self.model,self.num,self.engine,self.color,self.light,self.doors,self.maxV,self.m = map(str,i.split())
-                self.list += [[self.mark,self.model,self.num,self.engine,self.color,self.light,self.doors,self.maxV,self.m]]
+                self.mark,self.model,self.num,self.engine,self.color,self.light,self.doors,self.maxV,self.trunk,self.milage,self.m = map(str,i.split())
+                self.list += [[self.mark,self.model,self.num,self.engine,self.color,self.light,self.doors,self.maxV,self.trunk,self.milage,self.m]]
             self.nums = [i[2] for i in self.list]
 
     def reg(self, par, what):
@@ -106,30 +113,31 @@ class ReadCar():
         if art in marks:
             for i in range(len(marks)):
                 if marks[i]==art:
-                    print('-' * 117)
+                    print('-' * 135)
                     print(f'|{cars[i][0]:^20}|{cars[i][1]:^20}|{cars[i][2]:^10}|{cars[i][3]:^14}|{cars[i][4]:^15}|'
-                          f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|')
+                        f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|{cars[i][9]:^8}|{cars[i][10]:^8}|')
+
                     self.status = 0
 
         elif art in models:
             for i in range(len(models)):
                 if models[i]==art:
-                    print('-' * 117)
+                    print('-' * 135)
                     print(f'|{cars[i][0]:^20}|{cars[i][1]:^20}|{cars[i][2]:^10}|{cars[i][3]:^14}|{cars[i][4]:^15}|'
-                          f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|')
+                        f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|{cars[i][9]:^8}|{cars[i][10]:^8}|')
                     self.status = 0
 
         elif NUM in nums:
             for i in range(len(nums)):
                 if nums[i]==NUM:
-                    print('-' * 117)
+                    print('-' * 135)
                     print(f'|{cars[i][0]:^20}|{cars[i][1]:^20}|{cars[i][2]:^10}|{cars[i][3]:^14}|{cars[i][4]:^15}|'
-                          f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|')
+                        f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|{cars[i][9]:^8}|{cars[i][10]:^8}|')
                     self.status = 1
                     break
 
         else:
-            print('-' * 117)
+            print('-' * 135)
             print('\t\t\t\t\tПо вашему запросу ничего не нашлось')
             self.status = 0
 
@@ -141,7 +149,7 @@ class ReadCar():
             with open(f'{file}','w',encoding='utf-8') as f:
                 for i in range(len(list)):
                     f.write(f'{list[i][0]} {list[i][1]} {list[i][2]} {list[i][3]} {list[i][4]} '
-                          f'{list[i][5]} {list[i][6]} {list[i][7]} {list[i][8]}\n')
+                          f'{list[i][5]} {list[i][6]} {list[i][7]} {list[i][8]} {list[i][9]} {list[i][10]}\n')
 
         if what=='num':
             n = [i[2] for i in cars]
@@ -185,12 +193,33 @@ class ReadCar():
             if (art not in d):
                 while art not in d:
                     art = input('\nВведите состояние дверей только открыто/заперто или open/close:\n')
-
             for i in range(len(nums)):
                 if nums[i] == index:
                     cars[i][6] = art
 
             wr(cars)
+
+        if what=='trunk':
+            index = self.reg(index, 'num')
+            d = ['open', 'Open', 'close', 'Close', 'открыто', 'Открыто', 'заперто', 'Заперто']
+            if (art not in d):
+                while art not in d:
+                    art = input('\nВведите состояние дверей только открыто/заперто или open/close:\n')
+            for i in range(len(nums)):
+                if nums[i] == index:
+                    cars[i][9] = art
+
+            wr(cars)
+        
+        if what=='milage':
+            index = self.reg(index, 'num')
+            for i in range(len(nums)):
+                if nums[i]==index:
+                    cars[i][10] = art
+
+            wr(cars)
+
+            
 
     def delete(self,file,what=None):
         if what=='all':
@@ -201,4 +230,4 @@ class ReadCar():
             with open(f'{file}','w',encoding='utf-8') as f:
                 for i in self.list:
                     if what not in i:f.write(f'{i[0]} {i[1]} {i[2]} {i[3]} {i[4]} '
-                                             f'{i[5]} {i[6]} {i[7]} {i[8]}\n')
+                                             f'{i[5]} {i[6]} {i[7]} {i[8]} {i[9]} {i[10]}\n')

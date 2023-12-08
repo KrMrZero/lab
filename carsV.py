@@ -3,7 +3,7 @@ from objects import *
 print('\t\t\t\t\tКаталог машин версия №3')
 
 while True:
-    print('-' * 117)
+    print('-' * 135)
     print('Какую операцию вы хотите выполнить?')
     print('1)Добавить\n2)Список\n3)Поиск\n4)Очистить\n5)Завершить')
 
@@ -17,19 +17,19 @@ while True:
     if qws == 'Список' or qws == 'список' or qws == '2':
         print('\t\t\t\t\tСписок всех машин')
         head = (f'|{"Марка":^20}|{"Модель":^20}|{"Номер":^10}|{"Двигатель л.с.":^14}|{"Цвет":^15}|'
-                f'{"Фары":^5}|{"Двери":^7}|{"Скорость":^8}|{"Масса кг":^8}|')
+                f'{"Фары":^5}|{"Двери":^7}|{"Скорость":^8}|{"Масса кг":^8}|{"Багажник":^8}|{"Пробег":^8}|')
         print(head)
         cars = ReadCar().list
         for i in range(len(cars)):
-            print('-' * 117)
+            print('-' * 135)
             print(f'|{cars[i][0]:^20}|{cars[i][1]:^20}|{cars[i][2]:^10}|{cars[i][3]:^14}|{cars[i][4]:^15}|'
-                    f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|')
+                    f'{cars[i][5]:^5}|{cars[i][6]:^7}|{cars[i][7]:^8}|{cars[i][8]:^8}|{cars[i][9]:^8}|{cars[i][10]:^8}|')
 
     if qws == 'Поиск' or qws == 'поиск' or qws == '3':
         print('Введите марку, модель или номер автомобиля')
 
         head = (f'|{"Марка":^20}|{"Модель":^20}|{"Номер":^10}|{"Двигатель л.с.":^14}|{"Цвет":^15}|'
-                f'{"Фары":^5}|{"Двери":^7}|{"Скорость":^8}|{"Масса кг":^8}|')
+                f'{"Фары":^5}|{"Двери":^7}|{"Скорость":^8}|{"Масса кг":^8}|{"Багажник":^8}|{"Пробег":^8}|')
 
         art = input()
         print(head)
@@ -45,7 +45,7 @@ while True:
             if change == '1' or change == 'Изменить' or change == 'изменить':
 
                 print('Что вы хотите изменить?')
-                variant = input('1)Номер\n2)Цвет\n3)Состояние фар\n4)Состояние дверей\n5)Ничего\n')
+                variant = input('1)Номер\n2)Цвет\n3)Состояние фар\n4)Состояние дверей\n5)Состояние багажника\n6)Пробег\n7)Ничего\n')
 
                 if variant == '1' or variant == 'Номер':
                     num = input('Номер: ')
@@ -62,6 +62,14 @@ while True:
                 if variant == '4' or variant == 'Состояние дверей':
                     doors = input('Состояниее дверей: ')
                     read.change('car catalog 3.1.txt', art=doors, index=art, what='doors')
+                
+                if variant == '5' or variant == 'Состояние багажника':
+                    trunk = input('Состояние багажника: ')
+                    read.change('car catalog 3.1.txt', art=trunk, index=art, what='trunk')
+                
+                if variant == '6' or variant == 'Пробег':
+                    milage = input('Пробег: ')
+                    read.change('car catalog 3.1.txt', art=milage, index=art, what='milage')
 
             if change == '2' or change == 'Удалить' or change == 'удалить':
                 delete = input('Точно хотите удалить машину из списка?\n')

@@ -1,10 +1,3 @@
-Toyota RAV4 A270CC72 150 white on close 185 1715
-Toyota Platz C777OB38 123 gray off close 160 900
-Toyota Camry A666AC124 132 black on open 200 1555
-Toyota Corola X123XX124 123 blue on close 200 1000
-Mitsubishi Outlander B123AH38 146 black off open 188 1490
-Porsche Panamera C666OM777 440 red on close 420 1770
-Porsche Macan C270CC720 400 black on open 232 1865
-Ferrari Portofino C270OB38 600 green on open 320 1664
-Ferrari California A111AA38 490 red off close 316 1625
-Lexus LX600 B222BB124 300 chocolate off open 230 1725
+Toyota RAV4 A270CC72 150 white on close 185 1715 close 70000
+Toyota Platz C777OB38 123 gray off close 160 900 open 350000
+Nissan Terrano A138CC124 109 black off close 190 close close 20000
